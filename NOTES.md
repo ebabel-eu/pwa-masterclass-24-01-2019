@@ -37,6 +37,7 @@ Publishing a PWA to Google App with Trusted Web Activity
 https://developers.google.com/web/updates/2019/08/twas-quickstarts
 https://developers.google.com/web/updates/2019/02/using-twa
 https://www.voorhoede.nl/en/blog/the-state-of-installability/
+https://web-push-book.gauntface.com/
 
 ## Lunch conversations
 
