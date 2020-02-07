@@ -19,7 +19,8 @@ Also see Pinterest case study for Progressive web Apps.
 
 ## !!! Important !!!
 
-Make sure to call `registration.update()` when the code service worker is registered.
+- Make sure to call `registration.update()` when the code service worker is registered.
+- In service worker install event , always run `self.skipWaiting()` and in activate event always run `self.clients.claim()`, otherwise there can be conflicts between tabs running the same PWA.
 
 
 ## Server side templates
