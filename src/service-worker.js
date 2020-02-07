@@ -3,29 +3,27 @@
 // NOTE: rev hashed core assets from build will be included as global `var serviceworkerOption = { assets: [...] }` see https://www.npmjs.com/package/serviceworker-webpack-plugin
 
 const CORE_ASSETS = [
-	'/offline/'
+	'/offline/',
+	'assets/images/avatar.svg',
+	'assets/images/bell-off.svg',
+	'assets/images/bell-ring.svg',
+	'assets/images/icon-72x72.png',
+	'assets/images/icon-96x96.png',
+	'assets/images/icon-128x128.png',
+	'assets/images/icon-144x144.png',
+	'assets/images/icon-152x152.png',
+	'assets/images/icon-192x192.png',
+	'assets/images/icon-384x384.png',
+	'assets/images/icon-512x512.png',
+	'assets/images/logout.svg',
 ].concat(serviceWorkerOption.assets);
 
 self.addEventListener('install', event => {
 	console.log('Installing service worker');
 	// precache static assets and offline fallback
 	event.waitUntil(caches.open('webchat-cache-v1.0.0').then(cache => {
-		return cache.addAll([
-			'assets/images/avatar.svg',
-			'assets/images/bell-off.svg',
-			'assets/images/bell-ring.svg',
-			'assets/images/icon-72x72.png',
-			'assets/images/icon-96x96.png',
-			'assets/images/icon-128x128.png',
-			'assets/images/icon-144x144.png',
-			'assets/images/icon-152x152.png',
-			'assets/images/icon-192x192.png',
-			'assets/images/icon-384x384.png',
-			'assets/images/icon-512x512.png',
-			'assets/images/logout.svg',
-		]);
+		return cache.addAll(CORE_ASSETS);
 	}));
-
 
 	return self.skipWaiting();
 });
