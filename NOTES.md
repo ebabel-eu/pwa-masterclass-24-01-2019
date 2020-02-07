@@ -24,4 +24,6 @@ In the code of De Voorhoede, the html pages are server-side templates, but that 
 
 https://www.pwabuilder.com/
 
+Create all the icon files from one icon file.
+https://app-manifest.firebaseapp.com/
 
