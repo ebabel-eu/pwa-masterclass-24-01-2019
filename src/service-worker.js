@@ -14,5 +14,13 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
 	console.log('Fetch event for:', event.request.url);
-	// TODO: hijack fetch events
+
+	// This line will return a string for all responses.
+	// event.respondWith(new Response('highjack!'));
+
+	if (request.headers.get('accept').indexOf('images/*') > -1) {
+		event.respondWith(fetch('https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'))
+
+		// event.respondWith(fetch('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlvdvMoGYKcfaOx2ejvmlFm479Qfcdkd0AccjIYUMXWcye19EW'))
+	}
 });
