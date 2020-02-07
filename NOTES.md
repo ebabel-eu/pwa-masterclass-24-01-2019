@@ -17,6 +17,11 @@ Lots of info about making the case to convince managers we should switch to a Pr
 
 Also see Pinterest case study for Progressive web Apps.
 
+## !!! Important !!!
+
+Make sure to call `registration.update()` when the code service worker is registered.
+
+
 ## Server side templates
 In the code of De Voorhoede, the html pages are server-side templates, but that isn't relevant to PWA which is 100% client-side.
 
