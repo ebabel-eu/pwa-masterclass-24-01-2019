@@ -33,6 +33,9 @@ https://www.pwabuilder.com/
 Create all the icon files from one icon file.
 https://app-manifest.firebaseapp.com/
 
+Publishing a PWA to Google App
+https://www.voorhoede.nl/en/blog/the-state-of-installability/
+
 ## Lunch conversations
 
 - It's possible to publish a PWA directly to the Google Play store and the Windows 10 app store! Only iOS app store needs a wrapper, like Cordova.
