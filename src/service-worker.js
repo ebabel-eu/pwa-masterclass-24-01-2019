@@ -2,6 +2,7 @@
 
 // NOTE: rev hashed core assets from build will be included as global `var serviceworkerOption = { assets: [...] }` see https://www.npmjs.com/package/serviceworker-webpack-plugin
 
+const CORE_CACHE_NAME = 'webchat-cache-v1.0.0';
 const CORE_ASSETS = [
 	'/offline/',
 	'assets/images/avatar.svg',
@@ -21,11 +22,10 @@ const CORE_ASSETS = [
 self.addEventListener('install', event => {
 	console.log('Installing service worker');
 	// precache static assets and offline fallback
-	event.waitUntil(caches.open('webchat-cache-v1.0.0').then(cache => {
-		return cache.addAll(CORE_ASSETS);
-	}));
-
-	return self.skipWaiting();
+	event.waitUntil(caches.open(CORE_CACHE_NAME)
+		.then(cache => cache.addAll(CORE_ASSETS))
+		.then(() => self.skipWaiting())
+	);
 });
 
 self.addEventListener('activate', event => {
@@ -36,8 +36,20 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
 	console.log('Fetch event for:', event.request.url);
-	// TODO: serve precached static assets(you can use the isCoreGetRequest helper)
-	// TODO: serve cached offline fallback when an HTML request fails(you can use the isHtmlGetRequest helper)
+	// serve precached static assets(you can use the isCoreGetRequest helper)
+	const request = event.request;
+	if (isCoreGetRequest(request)) {
+		event.respondWith(caches.open(CORE_CACHE_NAME).then(cache => cache.match(request.url)));
+	}
+	// serve cached offline fallback when an HTML request fails(you can use the isHtmlGetRequest helper)
+	else if (isHtmlGetRequest(request)) {
+		event.respondWith(
+			fetch(request).catch(error => {
+				console.error(error);
+				return caches.open(CORE_CACHE_NAME).then(cache => cache.match('/offline/'))
+			})
+		)
+	}
 });
 
 /**
